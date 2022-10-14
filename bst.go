@@ -1,5 +1,7 @@
 package trees
 
+import "fmt"
+
 type Node struct {
 	item  int
 	left  *Node
@@ -66,4 +68,14 @@ func Search(root *Node, key int) bool {
 		return true
 	}
 	return false
+}
+
+func Inorder(root *Node) {
+	if root == nil {
+		return
+	}
+	Inorder(root.left)
+	x := fmt.Sprintf("%d ->", root.item)
+	fmt.Print(x)
+	Inorder(root.right)
 }
