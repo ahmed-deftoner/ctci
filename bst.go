@@ -8,8 +8,8 @@ type Node struct {
 
 func (n Node) NewNode(item int) *Node {
 	return &Node{
-		item: item,
-		left: nil,
+		item:  item,
+		left:  nil,
 		right: nil,
 	}
 }
@@ -20,7 +20,7 @@ func Insert(root *Node, key int) {
 	}
 	if root.item < key {
 		Insert(root.right, key)
-	}else {
+	} else {
 		Insert(root.left, key)
 	}
 }
@@ -29,7 +29,7 @@ func InorderElement(cur *Node) *Node {
 	for curr.left != nil {
 		cur = cur.left
 	}
-	return cur;
+	return cur
 }
 
 func Delete(root *Node, key int) *Node {
@@ -57,5 +57,15 @@ func Delete(root *Node, key int) *Node {
 		}
 	}
 }
-Search(root *Node, key int)
 
+func Search(root *Node, key int) bool {
+	if root == nil {
+		return false
+	} else if root.item > key {
+		Search(root.left, key)
+	} else if root.item < key {
+		Search(root.right, key)
+	} else {
+		return true
+	}
+}
