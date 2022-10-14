@@ -26,7 +26,7 @@ func Insert(root *Node, key int) {
 }
 
 func InorderElement(cur *Node) *Node {
-	for curr.left != nil {
+	for cur.left != nil {
 		cur = cur.left
 	}
 	return cur
@@ -40,22 +40,19 @@ func Delete(root *Node, key int) *Node {
 	} else if root.item < key {
 		Delete(root.right, key)
 	} else {
-		if root.item == key {
-			root = nil
+		if root.left == nil {
+			root = root.right
+			root.right = nil
+		} else if root.right == nil {
+			root = root.left
+			root.left = nil
 		} else {
-			if root.left == nil {
-				root = root.right
-				root.right = nil
-			} else if root.right == nil {
-				root = root.left
-				root.left = nil
-			} else {
-				d := InorderElement(root.right)
-				root.item = d.item
-				d = nil
-			}
+			d := InorderElement(root.right)
+			root.item = d.item
+			d = nil
 		}
 	}
+	return root
 }
 
 func Search(root *Node, key int) bool {
@@ -68,4 +65,5 @@ func Search(root *Node, key int) bool {
 	} else {
 		return true
 	}
+	return false
 }
