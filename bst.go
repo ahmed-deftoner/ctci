@@ -15,7 +15,14 @@ func (n Node) NewNode(item int) *Node {
 }
 
 func Insert(root *Node, key int) {
-
+	if root == nil {
+		root.NewNode(key)
+	}
+	if root.item < key {
+		Insert(root.right, key)
+	}else {
+		Insert(root.left, key)
+	}
 }
 Delete(root *Node, key int)
 Search(root *Node, key int)
