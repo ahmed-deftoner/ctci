@@ -29,21 +29,31 @@ func InorderElement(cur *Node) *Node {
 	for curr.left != nil {
 		cur = cur.left
 	}
-	return &cur;
+	return cur;
 }
 
-func Delete(root *Node, key int) {
-	if root.item == key {
-		root = nil
+func Delete(root *Node, key int) *Node {
+	if root == nil {
+		return nil
+	} else if root.item > key {
+		Delete(root.left, key)
+	} else if root.item < key {
+		Delete(root.right, key)
 	} else {
-		if root.left == nil {
-			root = root.right
-			root.right = nil
-		} else if root.right == nil {
-			root = root.left
-			root.left = nil
+		if root.item == key {
+			root = nil
 		} else {
-
+			if root.left == nil {
+				root = root.right
+				root.right = nil
+			} else if root.right == nil {
+				root = root.left
+				root.left = nil
+			} else {
+				d := InorderElement(root.right)
+				root.item = d.item
+				d = nil
+			}
 		}
 	}
 }
