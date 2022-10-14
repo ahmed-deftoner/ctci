@@ -8,7 +8,7 @@ type Node struct {
 	right *Node
 }
 
-func (n Node) NewNode(item int) *Node {
+func NewNode(item int) *Node {
 	return &Node{
 		item:  item,
 		left:  nil,
@@ -18,9 +18,8 @@ func (n Node) NewNode(item int) *Node {
 
 func Insert(root *Node, key int) {
 	if root == nil {
-		root.NewNode(key)
-	}
-	if root.item < key {
+		NewNode(key)
+	} else if root.item < key {
 		Insert(root.right, key)
 	} else {
 		Insert(root.left, key)
