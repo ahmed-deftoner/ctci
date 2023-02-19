@@ -33,12 +33,14 @@ class LinkedList<T> {
         if (this.head.data == data) {
             this.head = undefined  
         } else {
-            let temp: Node<T> = this.head
-            while (temp.next != undefined) {
-                if (temp.next.data == data) {
-                    temp.next = temp.next.next
+            let prev: Node<T>
+            let current: Node<T> = this.head
+            while (current.next != undefined) {
+                prev = current
+                current = current.next
+                if (current.data == data) {
+                    prev.next = current.next
                 }
-                temp = temp.next
             }
         }
     }
@@ -51,11 +53,17 @@ class LinkedList<T> {
         }
     }
 
-    peekFirst(): T {
+    peekFirst(): T | undefined {
+        if (this.head == undefined) {
+            return undefined
+        }
         return this.head.data
     }
 
-    peekLast(): T {
+    peekLast(): T | undefined {
+        if (this.head == undefined) {
+            return undefined
+        }
         return this.tail.data
     }
 }
@@ -66,5 +74,8 @@ x.addNode(44)
 x.addNode(65)
 x.print()
 x.deleteNode(44)
+x.deleteNode(65)
+x.deleteNode(23)
+x.print()
 console.log(x.peekFirst())
 console.log(x.peekLast())
