@@ -6,10 +6,12 @@ type Node<T> = {
 class LinkedList<T> {
     private head: Node<T>;
     private tail: Node<T>;
+    private len: number;
 
     constructor() {
         this.head = undefined;
         this.tail = undefined;
+        this.len = 0;
     }
 
     addAtStart(data: T) {
@@ -18,6 +20,7 @@ class LinkedList<T> {
             next: this.head
        };
        this.head = newNode;
+       this.len++;
     }
 
     addAtEnd(data: T) {
@@ -35,6 +38,7 @@ class LinkedList<T> {
             temp.next = newNode;
         }
         this.tail = newNode;
+        this.len++;
     }
 
     deleteNode(data: T) {
@@ -48,6 +52,7 @@ class LinkedList<T> {
                 current = current.next;
                 if (current.data == data) {
                     prev.next = current.next;
+                    this.len--;
                 }
             }
         }
@@ -55,10 +60,12 @@ class LinkedList<T> {
 
     print() {
         let temp: Node<T> = this.head;
+        let arr: Array<T> = new Array<T>();
         while (temp != undefined) {
-            console.log(`${temp.data} ->`);
+            arr.push(temp.data);
             temp = temp.next;
         }
+        console.log(arr);
     }
 
     peekFirst(): T | undefined {
@@ -74,6 +81,13 @@ class LinkedList<T> {
         }
         return this.tail.data;
     }
+
+    length(): number {
+        if (this.head == undefined) {
+            return 0;
+        }
+        return this.len;
+    }
 }
 
 let x: LinkedList<number> = new LinkedList<number>()
@@ -82,5 +96,7 @@ x.addAtEnd(44)
 x.addAtEnd(65)
 x.addAtStart(56)
 x.print()
+x.deleteNode(65)
 console.log(x.peekFirst())
 console.log(x.peekLast())
+console.log(x.length())
