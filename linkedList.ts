@@ -58,6 +58,18 @@ class LinkedList<T> {
         }
     }
 
+    deleteEnd() {
+        let current: Node<T> = this.head;
+        let prev: Node<T> = current;
+        while (current.next != undefined) {
+            prev = current;
+            current = current.next;
+        }
+        this.tail = prev;
+        current = undefined;
+        this.len--;
+    }
+
     print() {
         let temp: Node<T> = this.head;
         let arr: Array<T> = new Array<T>();
@@ -96,7 +108,7 @@ x.addAtEnd(44)
 x.addAtEnd(65)
 x.addAtStart(56)
 x.print()
-x.deleteNode(65)
+x.deleteEnd()
 console.log(x.peekFirst())
 console.log(x.peekLast())
 console.log(x.length())
