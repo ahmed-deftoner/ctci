@@ -25,10 +25,9 @@ class LinkedList<T> {
 
     addAtEnd(data: T) {
         const newNode: Node<T> = {
-             data: data, 
-             next: undefined
+             data: data
         };
-        if (this.head == undefined) {
+        if (this.head === undefined) {
             this.head = newNode;
         } else {
             let temp: Node<T> = this.head;
@@ -42,15 +41,15 @@ class LinkedList<T> {
     }
 
     deleteNode(data: T) {
-        if (this.head.data == data) {
+        if (this.head.data === data) {
             this.head = undefined;
         } else {
             let prev: Node<T>;
             let current: Node<T> = this.head;
-            while (current.next != undefined) {
+            while (current.next !== undefined) {
                 prev = current;
                 current = current.next;
-                if (current.data == data) {
+                if (current.data === data) {
                     prev.next = current.next;
                     this.len--;
                 }
@@ -61,7 +60,7 @@ class LinkedList<T> {
     deleteEnd() {
         let current: Node<T> = this.head;
         let prev: Node<T> = current;
-        while (current.next != undefined) {
+        while (current.next !== undefined) {
             prev = current;
             current = current.next;
         }
@@ -78,29 +77,29 @@ class LinkedList<T> {
     print() {
         let temp: Node<T> = this.head;
         let arr: Array<T> = new Array<T>();
-        while (temp != undefined) {
+        while (temp !== undefined) {
             arr.push(temp.data);
             temp = temp.next;
         }
         console.log(arr);
     }
 
-    peekFirst(): T | undefined {
-        if (this.head == undefined) {
-            return undefined;
+    peekFirst(): T | null {
+        if (this.head === undefined) {
+            return null;
         }
         return this.head.data;
     }
 
-    peekLast(): T | undefined {
-        if (this.head == undefined) {
-            return undefined;
+    peekLast(): T | null {
+        if (this.head === undefined) {
+            return null;
         }
         return this.tail.data;
     }
 
     length(): number {
-        if (this.head == undefined) {
+        if (this.head === undefined) {
             return 0;
         }
         return this.len;
