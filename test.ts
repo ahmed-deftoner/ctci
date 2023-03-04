@@ -62,27 +62,25 @@ function matchingStrings(strings: string[], queries: string[]): number[] {
 
 function lonelyinteger(a: number[]): number {
     // Write your code here
-    let n: number = -1;
-    let s: Set<number>;
-    a.sort();
-    for (let index = 0; index < a.length; index++) {
-       let found = true;
-       for (let j = index + 1; j < a.length; j++) {
-            if (a[j] == a[index]) {
+    const arr: Set<number> = new Set<number>();
+    for (let i = 0; i < a.length; i++) {
+        const element = a[i];
+        let found = true;
+        if (arr.has(element)) {
+            continue;
+        }
+        for (let j = i + 1; j < a.length; j++) {
+            if (a[j] == element && !arr.has(element)) {
                 found = false;
-                console.log(a[j]);
-                break;   
+                break;
             }
-       }
-       if (found == true) {
-            n = a[index];
-            console.log(n);
-            break;
-       }
-     }
-    console.log(a);
-    console.log(n);
-    return n;
+        }
+        if (found == true) {
+            return element;
+        }
+        arr.add(element);
+    }
+    return -1;
 }
 
 function flippingBits(n: number): number {
@@ -142,11 +140,41 @@ function pangrams(s: string): string {
     return "not pangram";
 }
 
+function birthday(s: number[], d: number, m: number): number {
+    // Write your code here
+    let count = 0;
+    for (let i = 0; i < s.length - m + 1; i++) {
+        const arr: Array<number> = [];
+        arr.push(s[i]);
+        for (let j = i + 1; j < i + m; j++) {
+            arr.push(s[j]);
+        }
+        if (arr.reduce((acc: number, curr: number) => acc += curr) >= d) {
+            count++;
+        }
+    }
+    //console.log(count);
+    return count;
+}
+
+function twoArrays(k: number, A: number[], B: number[]): string {
+    // Write your code here
+    A = A.sort().reverse();
+    B = B.sort();
+    for (let i = 0; i < A.length; i++) {
+        if (A[i] + B[i] < k) {
+            return "NO";
+        }
+    }
+    return "YES";
+}
+
+
 //plusMinus([-4, 3, -9, 0, 4, 1]);
 //miniMaxSum([1, 2, 3, 4, 5]);
 //timeConversion("12:45:54PM")
 //matchingStrings(["aba", "baba", "aba", "xzxb"], ["aba", "xzxb", "ab"]);
-//lonelyinteger([34, 95, 34, 64, 45, 95, 16, 80, 80, 75, 3, 25, 75, 25, 31, 3, 64, 16, 31]);
+lonelyinteger([34, 95, 34, 64, 45, 95, 16, 80, 80, 75, 3, 25, 75, 25, 31, 3, 64, 16, 31]);
 //flippingBits(1);
 /*diagonalDifference([
     [11, 2, 4],
@@ -154,4 +182,4 @@ function pangrams(s: string): string {
     [10, 8, -12]
 ]);*/
 
-console.log(pangrams("qmExzBIJmdELxyOFWv LOCmefk TwPhargKSPEqSxzveiun"));
+birthday([2,2,1,3,2], 4, 2);
