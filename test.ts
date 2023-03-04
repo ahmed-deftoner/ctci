@@ -85,8 +85,73 @@ function lonelyinteger(a: number[]): number {
     return n;
 }
 
+function flippingBits(n: number): number {
+    // Write your code here
+    const l = 32 - n.toString(2).length;
+    let out: string = n.toString(2);
+    for (let index = 0; index < l; index++) {
+        out = "0" + out;
+    }
+    const u: string = out.split("").map((x: string) => {
+        if (x == "0") {
+            return "1";
+        }
+        return "0";
+    }).join("");
+    //console.log(u);
+
+    return parseInt(u, 2);
+}
+
+function diagonalDifference(arr: number[][]): number {
+    // Write your code here
+    let i: number = 0;
+    let j: number = arr.length - 1;
+    let leftSum = 0;
+    let rightSum = 0;
+    while (i < arr.length) {
+        leftSum += arr[i][i];
+        rightSum += arr[i][j];
+        i++;
+        j--;
+    }
+    return Math.abs(leftSum - rightSum);
+}
+
+function countingSort(arr: number[]): number[] {
+    // Write your code here
+    const freq = new Array<number>(arr.length).fill(0);
+    for (let index = 0; index < arr.length; index++) {
+        freq[arr[index]]++;
+    }
+    return freq;
+}
+
+function pangrams(s: string): string {
+    // Write your code here
+    s = s.toLowerCase();
+    let set: Set<string> = new Set<string>(s);
+    const letters = "abcdefghijklmnopqrstuvwxyz";
+    let x = Array.from(set).filter((x: string) => x != " ")
+        .sort()
+        .join("");
+    console.log(x);
+    if (letters == x) {
+        return "pangram";
+    }
+    return "not pangram";
+}
+
 //plusMinus([-4, 3, -9, 0, 4, 1]);
 //miniMaxSum([1, 2, 3, 4, 5]);
 //timeConversion("12:45:54PM")
 //matchingStrings(["aba", "baba", "aba", "xzxb"], ["aba", "xzxb", "ab"]);
-lonelyinteger([34, 95, 34, 64, 45, 95, 16, 80, 80, 75, 3, 25, 75, 25, 31, 3, 64, 16, 31]);
+//lonelyinteger([34, 95, 34, 64, 45, 95, 16, 80, 80, 75, 3, 25, 75, 25, 31, 3, 64, 16, 31]);
+//flippingBits(1);
+/*diagonalDifference([
+    [11, 2, 4],
+    [4, 5, 6],
+    [10, 8, -12]
+]);*/
+
+console.log(pangrams("qmExzBIJmdELxyOFWv LOCmefk TwPhargKSPEqSxzveiun"));
