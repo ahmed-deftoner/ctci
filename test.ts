@@ -159,8 +159,8 @@ function birthday(s: number[], d: number, m: number): number {
 
 function twoArrays(k: number, A: number[], B: number[]): string {
     // Write your code here
-    A = A.sort().reverse();
-    B = B.sort();
+    A = A.sort((a: number,b: number) => { return a - b});
+    B = B.sort((a: number,b: number) => { return a - b}).reverse();
     for (let i = 0; i < A.length; i++) {
         if (A[i] + B[i] < k) {
             return "NO";
