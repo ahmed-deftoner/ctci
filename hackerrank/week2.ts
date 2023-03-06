@@ -15,7 +15,7 @@ function sockMerchant(n: number, ar: number[]): number {
     let count = 0;
     x.forEach((v: number) => {
         count += Math.floor(v / 2);
-    })
+    });
     console.log(count);
     return 1;
 }
