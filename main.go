@@ -13,13 +13,8 @@ type DBCat struct {
 	Code int
 }
 
-func main() {
-	ch := make(chan Cat)
-	var cats []DBCat
-
-	go func() {
-
-		for {
+func checkMsgs(ch chan Cat, cats []DBCat)  {
+    for {
 			select {
 			case msg := <-ch:
 				//go func(msg Cat) {
@@ -29,7 +24,13 @@ func main() {
 			default:
 			}
 		}
-	}()
+}
+
+func main() {
+	ch := make(chan Cat)
+	var cats []DBCat
+
+	go checkMsgs(ch, cats)
 
 	for i := 0; i < 10; i++ {
 		cats = append(cats, DBCat{Name: "meow", Code: i + 2})
